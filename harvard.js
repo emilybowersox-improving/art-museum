@@ -1,5 +1,6 @@
 console.log("loaded");
 
+var apiKey = harvardApiKey;
 
 // get ALL the objects 
 // https://api.harvardartmuseums.org/object?apikey=apiKey
@@ -17,13 +18,21 @@ console.log("loaded");
 //    console.log(data); 
 // });
 
-var apikey = harvardApiKey;
-var harvardUrl = 'https://api.harvardartmuseums.org/object?apikey=' + apikey
+
+var baseUrl = "https://api.harvardartmuseums.org/object?title=";
+var searchTerm = "rabbit";
+var apiKeyEnding = "&apikey=" + apiKey;
+var finalUrl = baseUrl + searchTerm + apiKeyEnding;
+
+//https://api.harvardartmuseums.org/medium?title=cat&apikey=APIKEY
+
+var harvardUrl = 'https://api.harvardartmuseums.org/object?apikey=' + apiKey
+var myUrl = 'https://api.harvardartmuseums.org/medium?apikey=' + apiKey
 
 
 function displayRabbit() {
 
-    fetch(harvardUrl)
+    fetch(finalUrl)
         .then((response) => {
             return response.json();
         })
@@ -38,3 +47,35 @@ function displayRabbit() {
 }
 
 displayRabbit();
+
+
+//documentation
+//https://api-toolkit.herokuapp.com/6
+
+//url + resource + ?api
+// andtitle = 
+// wildcard is built into api 
+
+//Resource list 
+// Object
+// Person
+// Exhibition
+// Publication
+// Gallery
+// Spectrum
+// Classification
+// Century
+// Color
+// Culture
+// Group
+// Medium
+// Period
+// Place
+// Technique
+// Worktype
+// Activity
+// Site
+// Video
+// Image
+// Audio
+// Annotation
