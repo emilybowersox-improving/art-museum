@@ -19,18 +19,18 @@ var apiKey = harvardApiKey;
 // });
 
 
-var baseUrl = "https://api.harvardartmuseums.org/object?title=";
+var baseUrl = "https://api.harvardartmuseums.org/image?title=";
 var searchTerm = "rabbit";
 var apiKeyEnding = "&apikey=" + apiKey;
 var finalUrl = baseUrl + searchTerm + apiKeyEnding;
 
-//https://api.harvardartmuseums.org/medium?title=cat&apikey=APIKEY
+//https://api.harvardartmuseums.org/image?title=cat&apikey=APIKEY
 
-var harvardUrl = 'https://api.harvardartmuseums.org/object?apikey=' + apiKey
-var myUrl = 'https://api.harvardartmuseums.org/medium?apikey=' + apiKey
+var harvardUrl = 'https://api.harvardartmuseums.org/image?apikey=' + apiKey
+var myUrl = 'https://api.harvardartmuseums.org/iamge?apikey=' + apiKey
 
 
-function displayRabbit() {
+function displayPic() {
 
     fetch(finalUrl)
         .then((response) => {
@@ -40,13 +40,23 @@ function displayRabbit() {
         .then((data) => {
             console.log(data);
 
-            // const currentFox = document.querySelector('#first-pic');
-            // currentFox.src = data.image[0];
+            // Extract the info and records
+            info = data['info'];
+            records = data['records'];
+
+            console.log(records[0]);
+
+            const currentPic = document.querySelector('#first-pic');
+            const firstRecord = document.querySelector('#first-record');
+            // currentPic.src = data.records[0];
+            firstRecord.src = data.records[0].baseimageurl;
+
+            console.log(firstRecord.src);
         })
 
 }
 
-displayRabbit();
+displayPic();
 
 
 //documentation
