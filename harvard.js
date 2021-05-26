@@ -48,8 +48,9 @@ function displayPic() {
 
             const currentPic = document.querySelector('#first-pic');
             const firstRecord = document.querySelector('#first-record');
-            // currentPic.src = data.records[0];
+            
             firstRecord.src = data.records[0].baseimageurl;
+            currentPic.src = data.records[0].baseimageurl;
 
             console.log(firstRecord.src);
         })
