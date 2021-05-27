@@ -1,6 +1,7 @@
 console.log("loaded");
 
 var apiKey = harvardApiKey;
+const searchButton = document.querySelector('#search-button');
 
 // get ALL the objects 
 // https://api.harvardartmuseums.org/object?apikey=apiKey
@@ -30,6 +31,16 @@ var harvardUrl = 'https://api.harvardartmuseums.org/image?apikey=' + apiKey
 var myUrl = 'https://api.harvardartmuseums.org/iamge?apikey=' + apiKey
 
 
+
+  searchButton.addEventListener('click', (event) => {
+    console.log('button click')
+
+
+
+  });
+  
+
+
 function displayPic() {
 
     fetch(finalUrl)
@@ -51,6 +62,10 @@ function displayPic() {
             
             firstRecord.src = data.records[0].baseimageurl;
             currentPic.src = data.records[0].baseimageurl;
+
+            // for (let i = 0; i < data.records.length; i++) {
+            //     let record = data.records[i];
+            // }
 
             console.log(firstRecord.src);
         })
