@@ -25,7 +25,12 @@ const imageDiv = document.querySelector('#image-div');
 
 // const currentQueryValue = searchInput.value;
 const currentQueryValue = "cat";
-const apiUrl = `https://api.harvardartmuseums.org/image?apikey=${apiKey}&q=caption:${currentQueryValue}`
+// this version of the url always only returned one record! should have known: 
+// console.log(data.records.length); = 1 - I guess there was only one record in that call?
+// const apiUrl = `https://api.harvardartmuseums.org/image?apikey=${apiKey}&q=caption:${currentQueryValue}`
+// this version of the url is returning 10 (as it should, since total records per query = 10)
+// !!... and when the currentQueryValue = "cat" the records.length = 372421
+const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}`
 
 
 searchButton.addEventListener('click', (event) => {
@@ -47,7 +52,7 @@ searchButton.addEventListener('click', (event) => {
             console.log("Records:", records);
             console.log("total records per query:", info.totalrecordsperquery);
             console.log("Total records:", data.info.totalrecords);
-            // console.log(data.records.length);    = 1
+
        
             data.records.forEach((record) => {
 
