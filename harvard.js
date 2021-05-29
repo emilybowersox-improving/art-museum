@@ -23,7 +23,8 @@ const imageDiv = document.querySelector('#image-div');
 //`https://api.harvardartmuseums.org/image?apikey=${key}&q=caption:${currentQueryValue}&page=${currentPage}`
 
 
-const currentQueryValue = "dog";
+// const currentQueryValue = searchInput.value;
+const currentQueryValue = "cat";
 const apiUrl = `https://api.harvardartmuseums.org/image?apikey=${apiKey}&q=caption:${currentQueryValue}`
 
 
@@ -36,8 +37,6 @@ searchButton.addEventListener('click', (event) => {
         })
 
         .then((data) => {
-            
-                // for (let i = 0; i < data.records.length; i++) {
            
             // Extract the info and records
             info = data['info'];
@@ -46,36 +45,28 @@ searchButton.addEventListener('click', (event) => {
             console.log("Data:", data);
             console.log("Info:", info);
             console.log("Records:", records);
+            console.log("total records per query:", info.totalrecordsperquery);
+            console.log("Total records:", data.info.totalrecords);
+            // console.log(data.records.length);    = 1
        
-            for (let i = 0; i < 10; i++) {
-
-                var record = data.records[i];
-
+            data.records.forEach((record) => {
 
                 var newImage = document.createElement('img');
-                // newImage.src = data.records[i].baseimageurl;
+                newImage.src = record.baseimageurl;
                 var imageUrl = newImage.src;
                 imageDiv.appendChild(newImage);
                 console.log("Image url:", imageUrl);
-                //when i console log image url- i have 10...
+                
 
+                console.log(searchInput.value);
+                console.log(typeof(searchInput.value));
 
-
-            // for (let i = 0; i < data.records.length; i++) {
-            //     let record = data.records[i];
-            // // }
-
-            // console.log(firstRecord.src);
-        }
+        });
     })
     
 });
 
-
+//currently only returning 1 record, although "total records per query = 10"
 
 //documentation
 //https://api-toolkit.herokuapp.com/6
-
-//url + resource + ?api
-// andtitle = 
-// wildcard is built into api 
