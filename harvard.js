@@ -24,13 +24,19 @@ const imageDiv = document.querySelector('#image-div');
 
 
 // const currentQueryValue = searchInput.value;
-const currentQueryValue = "cat";
+const currentQueryValue = "dog";
 // this version of the url always only returned one record! should have known: 
 // console.log(data.records.length); = 1 - I guess there was only one record in that call?
 // const apiUrl = `https://api.harvardartmuseums.org/image?apikey=${apiKey}&q=caption:${currentQueryValue}`
 // this version of the url is returning 10 (as it should, since total records per query = 10)
 // !!... and when the currentQueryValue = "cat" the records.length = 372421
-const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}`
+// !!... and when the currentQueryValue = "dog" the records.length = 372421
+//....so..... it's not really reading my query value?
+//if you search the json records- "dog" is nowhere to be found!
+
+
+// if you do object instead of image, the queryvalue does show up in the title........
+const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}`;
 
 
 searchButton.addEventListener('click', (event) => {
@@ -62,10 +68,6 @@ searchButton.addEventListener('click', (event) => {
                 imageDiv.appendChild(newImage);
                 console.log("Image url:", imageUrl);
                 
-
-                console.log(searchInput.value);
-                console.log(typeof(searchInput.value));
-
         });
     })
     
