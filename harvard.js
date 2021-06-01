@@ -83,6 +83,13 @@ function fetchImages(apiUrl) {
 
 var currentPage;
 
+
+// function showPreviousButton() {
+//     previousPage.removeClass("hidden");
+//     console.log('SHOW ME');
+// }
+
+
 searchButton.addEventListener('click', (event) => {
     currentPage = 1;
     var currentQueryValue = searchInput.value;
@@ -97,11 +104,11 @@ nextPage.addEventListener('click', () => {
     var currentQueryValue = searchInput.value;
     const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}&page=${currentPage}`;
 
+    // showPreviousButton;
     fetchImages(apiUrl);
 });
 
 
-//toggle
 previousPage.addEventListener('click', () => {
     currentPage = currentPage -= 1;
     var currentQueryValue = searchInput.value;
@@ -112,8 +119,6 @@ previousPage.addEventListener('click', () => {
 
 
 
-
-
-
+//toggle the hidden class 
 
 
