@@ -2,6 +2,6 @@ img {
     max-width: 30em;
 }
 
-.hidden {
-    visibility: hidden;
-}
+/* .hidden {
+    display: none;
+} */

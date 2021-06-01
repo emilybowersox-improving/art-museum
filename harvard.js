@@ -2,9 +2,11 @@ var apiKey = harvardApiKey;
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-button');
 const imageDiv = document.querySelector('#image-div');
-const nextButton = document.querySelector('#nextButton');
-const previousPage = document.querySelector('#previousButton');
+const nextPage = document.querySelector('#nextPage');
+const previousPage = document.querySelector('#previousPage');
 
+//documentation
+//https://api-toolkit.herokuapp.com/6
 
 // get ALL the objects 
 // https://api.harvardartmuseums.org/object?apikey=apiKey
@@ -24,7 +26,7 @@ const previousPage = document.querySelector('#previousButton');
 // });
 
 //`https://api.harvardartmuseums.org/image?apikey=${key}&q=caption:${currentQueryValue}&page=${currentPage}`
-
+// so the search function does actually work with this^, but there is usually not enough entries to do paging 
 
 
 // const currentQueryValue = "dog";
@@ -39,21 +41,21 @@ const previousPage = document.querySelector('#previousButton');
 
 
 // if you do object instead of image, the queryvalue does show up in the title........
-const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}&page=${currentPage}`;
-var currentQueryValue;
-var currentPage = 1;
+// const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}&page=${currentPage}`;
+// var currentQueryValue;
+// var currentPage = 1;
 
 
-searchButton.addEventListener('click', (event) => {
-    currentQueryValue = searchInput.value;
-    console.log(currentQueryValue);
- 
+function fetchImages(apiUrl) {
+
     fetch(apiUrl)
+
         .then((response) => {
             return response.json();
         })
 
         .then((data) => {
+            console.log("Current page:", currentPage);
             console.log(apiUrl);
             // Extract the info and records
             info = data['info'];
@@ -77,11 +79,41 @@ searchButton.addEventListener('click', (event) => {
         });
     })
     
+};
+
+var currentPage;
+
+searchButton.addEventListener('click', (event) => {
+    currentPage = 1;
+    var currentQueryValue = searchInput.value;
+    const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}&page=${currentPage}`;
+
+    fetchImages(apiUrl);
+});
+
+
+nextPage.addEventListener('click', () => {
+    currentPage = currentPage += 1;
+    var currentQueryValue = searchInput.value;
+    const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}&page=${currentPage}`;
+
+    fetchImages(apiUrl);
+});
+
+
+//toggle
+previousPage.addEventListener('click', () => {
+    currentPage = currentPage -= 1;
+    var currentQueryValue = searchInput.value;
+    const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}&page=${currentPage}`;
+
+    fetchImages(apiUrl);
 });
 
 
 
-//currently only returning 1 record, although "total records per query = 10"
 
-//documentation
-//https://api-toolkit.herokuapp.com/6
+
+
+
+
