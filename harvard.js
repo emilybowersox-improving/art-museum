@@ -23,8 +23,8 @@ const imageDiv = document.querySelector('#image-div');
 //`https://api.harvardartmuseums.org/image?apikey=${key}&q=caption:${currentQueryValue}&page=${currentPage}`
 
 
-// const currentQueryValue = searchInput.value;
-const currentQueryValue = "dog";
+
+// const currentQueryValue = "dog";
 // this version of the url always only returned one record! should have known: 
 // console.log(data.records.length); = 1 - I guess there was only one record in that call?
 // const apiUrl = `https://api.harvardartmuseums.org/image?apikey=${apiKey}&q=caption:${currentQueryValue}`
@@ -37,10 +37,12 @@ const currentQueryValue = "dog";
 
 // if you do object instead of image, the queryvalue does show up in the title........
 const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}`;
+var currentQueryValue;
 
 
 searchButton.addEventListener('click', (event) => {
-  
+    currentQueryValue = searchInput.value;
+    console.log(currentQueryValue);
  
     fetch(apiUrl)
         .then((response) => {
