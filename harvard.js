@@ -2,6 +2,9 @@ var apiKey = harvardApiKey;
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-button');
 const imageDiv = document.querySelector('#image-div');
+const nextButton = document.querySelector('#nextButton');
+const previousPage = document.querySelector('#previousButton');
+
 
 // get ALL the objects 
 // https://api.harvardartmuseums.org/object?apikey=apiKey
@@ -36,8 +39,9 @@ const imageDiv = document.querySelector('#image-div');
 
 
 // if you do object instead of image, the queryvalue does show up in the title........
-const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}`;
+const apiUrl = `https://api.harvardartmuseums.org/image?title=${currentQueryValue}&apikey=${apiKey}&page=${currentPage}`;
 var currentQueryValue;
+var currentPage = 1;
 
 
 searchButton.addEventListener('click', (event) => {
@@ -50,7 +54,7 @@ searchButton.addEventListener('click', (event) => {
         })
 
         .then((data) => {
-           
+            console.log(apiUrl);
             // Extract the info and records
             info = data['info'];
             records = data['records'];
@@ -74,6 +78,8 @@ searchButton.addEventListener('click', (event) => {
     })
     
 });
+
+
 
 //currently only returning 1 record, although "total records per query = 10"
 
